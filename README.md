@@ -36,7 +36,7 @@ A fast and lightweight dialogue API built with Bun that serves random dialogues 
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/HornetHK.git
+   git clone https://github.com/Teczak-dev//HornetHK.git
    cd HornetHK
    ```
 
@@ -199,7 +199,7 @@ We welcome contributions! Here's how you can help:
 
 If you encounter any problems:
 
-1. **Check the Issues**: Look at [existing issues](https://github.com/yourusername/HornetHK/issues) first
+1. **Check the Issues**: Look at [existing issues](https://github.com/Teczak-dev//HornetHK/issues) first
 2. **Create New Issue**: If your problem isn't listed, create a new issue with:
    - Clear description of the problem
    - Steps to reproduce
@@ -229,9 +229,9 @@ A: Modern browsers require user interaction before allowing autoplay. Click the 
 
 ### Getting Help
 
-- 📧 **Email**: [your-email@example.com]
-- 💬 **Issues**: [GitHub Issues](https://github.com/yourusername/HornetHK/issues)
-- 📖 **Documentation**: Check this README and the `/demo` folder
+- 📧 **Email**: [developerms@icloud.com]
+- 💬 **Issues**: [GitHub Issues](https://github.com/Teczak-dev//HornetHK/issues)
+- 📖 **Documentation**: Check this README and the `main` folder
 
 ### Feature Requests
 
