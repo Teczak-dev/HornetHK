@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HornetHK API Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .title {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .dialogue-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            display: none;
+        }
+
+        .dialogue-card.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dialogue-text {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        .dialogue-image {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .audio-player {
+            margin: 20px 0;
+        }
+
+        .audio-player audio {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .fetch-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .fetch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .fetch-btn:active {
+            transform: translateY(0);
+        }
+
+        .loading {
+            color: #666;
+            font-style: italic;
+        }
+
+        .error {
+            color: #e74c3c;
+            background: #ffe6e6;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .api-info {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 0 10px 10px 0;
+            text-align: left;
+        }
+
+        .api-info h3 {
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+
+        .api-info code {
+            background: #34495e;
+            color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .response-json {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🚀 HornetHK API Demo</h1>
+        <p class="subtitle">Interactive demonstration of the dialogue API</p>
+
+        <div class="api-info">
+            <h3>📡 API Endpoint</h3>
+            <p>This demo fetches data from: <code>GET /dialogue</code></p>
+            <p>Returns a random dialogue with text, image, and audio</p>
+        </div>
+
+        <button class="fetch-btn" onclick="fetchDialogue()">
+            Get Random Dialogue
+        </button>
+
+        <div id="loading" class="loading" style="display: none;">
+            Loading dialogue...
+        </div>
+
+        <div id="error" class="error" style="display: none;">
+        </div>
+
+        <div id="dialogue-card" class="dialogue-card">
+            <div class="dialogue-text" id="dialogue-text"></div>
+            <img id="dialogue-image" class="dialogue-image" style="display: none;">
+            <div class="audio-player">
+                <audio id="dialogue-audio" controls autoplay style="display: none;">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="response-json">
+                <strong>API Response:</strong>
+                <pre id="json-response"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchDialogue() {
+            const loadingEl = document.getElementById('loading');
+            const errorEl = document.getElementById('error');
+            const dialogueCard = document.getElementById('dialogue-card');
+            const fetchBtn = document.querySelector('.fetch-btn');
+
+            // Reset UI
+            loadingEl.style.display = 'block';
+            errorEl.style.display = 'none';
+            dialogueCard.classList.remove('show');
+            fetchBtn.disabled = true;
+
+            try {
+                // Fetch dialogue from API
+                const response = await fetch('/dialogue');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const dialogue = await response.json();
+                
+                // Update UI with dialogue data
+                document.getElementById('dialogue-text').textContent = dialogue.dialogue;
+                
+                // Handle image
+                const imageEl = document.getElementById('dialogue-image');
+                if (dialogue.image) {
+                    imageEl.src = dialogue.image;
+                    imageEl.style.display = 'block';
+                    imageEl.onerror = () => {
+                        imageEl.style.display = 'none';
+                    };
+                } else {
+                    imageEl.style.display = 'none';
+                }
+
+                // Handle audio
+                const audioEl = document.getElementById('dialogue-audio');
+                if (dialogue.audio) {
+                    audioEl.src = dialogue.audio;
+                    audioEl.style.display = 'block';
+                    audioEl.onerror = () => {
+                        audioEl.style.display = 'none';
+                    };
+                } else {
+                    audioEl.style.display = 'none';
+                }
+
+                // Show JSON response
+                document.getElementById('json-response').textContent = JSON.stringify(dialogue, null, 2);
+
+                // Show the dialogue card with animation
+                setTimeout(() => {
+                    dialogueCard.classList.add('show');
+                }, 100);
+
+            } catch (error) {
+                console.error('Error fetching dialogue:', error);
+                errorEl.textContent = `Failed to fetch dialogue: ${error.message}`;
+                errorEl.style.display = 'block';
+            } finally {
+                loadingEl.style.display = 'none';
+                fetchBtn.disabled = false;
+            }
+        }
+
+        // Auto-fetch first dialogue when page loads
+        window.addEventListener('load', fetchDialogue);
+    </script>
+</body>
+</html>
