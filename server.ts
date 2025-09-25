@@ -5,10 +5,22 @@ const server = Bun.serve({
   async fetch(req) {
     const url = new URL(req.url);
 
-    // API endpoint
+    // API endpoint - returns random dialogue with random image
     if (url.pathname === "/dialogue") {
-      const randomDialogue = dialogues.dialogues[Math.floor(Math.random() * dialogues.dialogues.length)];
-      return new Response(JSON.stringify(randomDialogue), {
+      if (dialogues.dialogues.length === 0 || dialogues.images.length === 0) {
+        return new Response("No data available", { status: 500 });
+      }
+      
+      const randomDialogue = dialogues.dialogues[Math.floor(Math.random() * dialogues.dialogues.length)]!;
+      const randomImage = dialogues.images[Math.floor(Math.random() * dialogues.images.length)]!;
+      
+      const response = {
+        dialogue: randomDialogue.dialogue,
+        audio: randomDialogue.audio,
+        image: randomImage
+      };
+      
+      return new Response(JSON.stringify(response), {
         headers: { "Content-Type": "application/json" },
       });
     }

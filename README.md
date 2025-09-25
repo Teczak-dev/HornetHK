@@ -1,4 +1,4 @@
-# 🚀 HornetHK API
+# 🚀 HornetHK API v 1.0
 
 A fast and lightweight dialogue API built with Bun that serves random dialogues from Hornet (Hollow Knight) with associated images and audio files. 
 
@@ -19,7 +19,7 @@ A fast and lightweight dialogue API built with Bun that serves random dialogues 
 ## ✨ Features
 
 - **Fast Performance**: Built with Bun for lightning-fast API responses
-- **Random Dialogues**: Returns random dialogue entries with text, images, and audio
+- **Random Dialogues**: Returns random dialogue with audio plus independently selected random image
 - **Static File Serving**: Serves images and audio files directly
 - **Interactive Demo**: Includes a beautiful web demo to test the API
 - **TypeScript Support**: Fully typed with TypeScript
@@ -36,7 +36,7 @@ A fast and lightweight dialogue API built with Bun that serves random dialogues 
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/Teczak-dev//HornetHK.git
+   git clone https://github.com/Teczak-dev/HornetHK.git
    cd HornetHK
    ```
 
@@ -99,10 +99,12 @@ curl http://localhost:3000/dialogue
 ```json
 {
   "dialogue": "Troshi kaleemo",
-  "image": "/public/images/Img1.jpg",
-  "audio": "/public/audio/TroshiKaleemo.mp3"
+  "audio": "/public/audio/TroshiKaleemo.mp3",
+  "image": "/public/images/img3.jpeg"
 }
 ```
+
+*Note: The image is randomly selected independently from the dialogue, so each request may return a different image even with the same dialogue.*
 
 #### JavaScript/Fetch Example
 
@@ -131,10 +133,10 @@ async function getRandomDialogue() {
 ### Response Schema
 
 ```typescript
-interface Dialogue {
+interface DialogueResponse {
   dialogue: string;  // The dialogue text
-  image: string;     // Path to associated image
   audio: string;     // Path to associated audio file
+  image: string;     // Path to randomly selected image (independent of dialogue)
 }
 ```
 
@@ -156,10 +158,12 @@ The API currently includes these dialogue entries:
 - **Hegale**
 - **Get gu**
 
-Each dialogue comes with:
-- 🎵 Associated audio file (MP3 format)
-- 🖼️ Associated image (JPG format)
+Each API response includes:
+- 🎵 Associated audio file (MP3 format) matching the dialogue
+- 🖼️ Randomly selected image (JPG/PNG/JPEG format) - independent of dialogue
 - 📝 Unique dialogue text
+
+**Available Images**: 7 different Hornet images that are randomly selected for each request.
 
 ## 🎨 Demo
 

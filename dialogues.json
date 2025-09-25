@@ -1,67 +1,65 @@
 {
     "dialogues": [
-    {
-        "dialogue": "Troshi kaleemo",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/TroshiKaleemo.mp3"
-    },
-    {
-        "dialogue": "Gola negosa tros",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/GolaNegosaTros.mp3"
-    },
-    {
-        "dialogue": "Hakana Segamos",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/HakanaSegamos.mp3"
-    },
-    {
-        "dialogue": "Un Hegale",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/UnHegale.mp3"
-    },
-    {
-        "dialogue": "Laffe nuffe nido",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/LaffeNuffeNido.mp3"
-    },
-    {
-        "dialogue": "Garama",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/Garama.mp3"
-    },
-    {
-        "dialogue": "Haha",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/Haha.mp3"
-    },
-    {
-        "dialogue": "HAAAAA!",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/HAAAAA.mp3"
-    },
-    {
-        "dialogue": "Shaw!",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/Shaw.mp3"
-    },
-    {
-        "dialogue": "De!",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/De.mp3"
-    },{
-        "dialogue": "Edino",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/Edino.mp3"
-    },
-    {
-        "dialogue": "Hegale",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/Hegale.mp3"
-    },{
-        "dialogue": "Get gu",
-        "image": "/public/images/Img1.jpg",
-        "audio": "/public/audio/GetGu.mp3"
-    }
-]
+        {
+            "dialogue": "Troshi kaleemo",
+            "audio": "/public/audio/TroshiKaleemo.mp3"
+        },
+        {
+            "dialogue": "Gola negosa tros",
+            "audio": "/public/audio/GolaNegosaTros.mp3"
+        },
+        {
+            "dialogue": "Hakana Segamos",
+            "audio": "/public/audio/HakanaSegamos.mp3"
+        },
+        {
+            "dialogue": "Un Hegale",
+            "audio": "/public/audio/UnHegale.mp3"
+        },
+        {
+            "dialogue": "Laffe nuffe nido",
+            "audio": "/public/audio/LaffeNuffeNido.mp3"
+        },
+        {
+            "dialogue": "Garama",
+            "audio": "/public/audio/Garama.mp3"
+        },
+        {
+            "dialogue": "Haha",
+            "audio": "/public/audio/Haha.mp3"
+        },
+        {
+            "dialogue": "HAAAAA!",
+            "audio": "/public/audio/HAAAAA.mp3"
+        },
+        {
+            "dialogue": "Shaw!",
+            "audio": "/public/audio/Shaw.mp3"
+        },
+        {
+            "dialogue": "De!",
+            "audio": "/public/audio/De.mp3"
+        },
+        {
+            "dialogue": "Edino",
+            "audio": "/public/audio/Edino.mp3"
+        },
+        {
+            "dialogue": "Hegale",
+            "audio": "/public/audio/Hegale.mp3"
+        },
+        {
+            "dialogue": "Get gu",
+            "audio": "/public/audio/GetGu.mp3"
+        }
+    ],
+    "images": [
+        "/public/images/img1.png",
+        "/public/images/img2.jpeg",
+        "/public/images/img3.jpeg",
+        "/public/images/img4.jpeg",
+        "/public/images/img5.jpeg",
+        "/public/images/img6.jpeg",
+        "/public/images/img7.jpg"
+    ]
 }
